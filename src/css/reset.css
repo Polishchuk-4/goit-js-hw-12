@@ -1,0 +1,56 @@
+/* Reset styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+fieldset {
+  padding: 0;
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+input,
+textarea,
+button {
+  padding: 0;
+  border: none;
+  font-family: inherit;
+  color: currentColor;
+  background-color: transparent;
+}
+input {
+  font-family: inherit;
+  border: none;
+  outline: none; /* Remove default focus outline */
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
