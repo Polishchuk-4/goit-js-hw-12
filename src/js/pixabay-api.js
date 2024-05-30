@@ -1,5 +1,5 @@
 import axios from 'axios';
-export default async function fetchURL(userInput) {
+export default async function fetchURL(userInput, countPage, per_page) {
   var API_KEY = '44071670-df551d8a467c5c77b993c0d31';
   const response = await axios.get(`https://pixabay.com/api/`, {
     params: {
@@ -8,7 +8,8 @@ export default async function fetchURL(userInput) {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: 15,
+      page: countPage,
+      per_page: per_page,
     },
   });
   return response.data;

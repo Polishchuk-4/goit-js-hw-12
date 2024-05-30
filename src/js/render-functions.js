@@ -29,5 +29,5 @@ export default function createGallery(images) {
         </li>`;
     })
     .join('');
-  gallery.innerHTML = imgHtmlElems;
+  gallery.insertAdjacentHTML('beforeend', imgHtmlElems);
 }
