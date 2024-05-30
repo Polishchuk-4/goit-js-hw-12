@@ -45,6 +45,8 @@ form.addEventListener('submit', async event => {
     createGallery(values.hits);
     gallerySimpleLightbox.refresh();
 
+    scrollToLastAddedCard();
+
     checkValueCounts(values.hits.length, values.totalHits);
   } catch (er) {
     console.log(er);
