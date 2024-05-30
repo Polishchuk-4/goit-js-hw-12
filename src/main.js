@@ -93,8 +93,6 @@ function checkValueCounts(values, totalValues) {
   }
 }
 
-// seed: sdk
-
 function iziToastInfo(message) {
   iziToast.info({
     timeout: 2000,
