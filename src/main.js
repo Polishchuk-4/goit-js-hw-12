@@ -69,15 +69,9 @@ function scrollToLastAddedCard() {
   const lastCard = gallery.lastElementChild;
   if (lastCard) {
     const rect = lastCard.getBoundingClientRect();
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollLeft =
-      window.pageXOffset || document.documentElement.scrollLeft;
-    const scrollByY = rect.top + scrollTop - window.pageYOffset;
-    const scrollByX = rect.left + scrollLeft - window.pageXOffset;
 
     window.scrollBy({
-      top: scrollByY,
-      left: scrollByX,
+      top: rect.width * 2,
       behavior: 'smooth',
     });
   }
