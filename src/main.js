@@ -23,33 +23,38 @@ form.addEventListener('submit', async event => {
     imageSearchInput.value === ''
   ) {
     iziToastInfo('Please, enter another request');
-    page = 1;
     return;
   }
-
+  page = 1;
   gallery.innerHTML = '';
   hideFetchMorePostsBtn();
   showLoadingIndicator();
+
   currentValueImageSearchInput = imageSearchInput.value;
 
   try {
     let values = await fetchURL(imageSearchInput.value, page, per_page);
+    console.log(values);
 
     hideLoadingIndicator();
-    if (values.totalHits < per_page) {
-      iziToastInfo(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
+
+    if (values.hits.length == 0) {
+      checkValueCounts(values.hits.length, values.totalHits);
       return;
     }
+
     createGallery(values.hits);
     gallerySimpleLightbox.refresh();
 
     scrollToLastAddedCard();
-
     checkValueCounts(values.hits.length, values.totalHits);
+
+    console.log('-- ' + page);
   } catch (er) {
     console.log(er);
+    iziToastInfo(
+      'An error occurred while fetching images. Please try again later.'
+    );
   }
 });
 
@@ -59,10 +64,14 @@ fetchMorePostsBtn.addEventListener('click', () => {
       createGallery(response.hits);
       gallerySimpleLightbox.refresh();
       scrollToLastAddedCard();
+
       checkValueCounts(response.hits.length, response.totalHits);
     })
     .catch(er => {
       console.log(er);
+      iziToastInfo(
+        'An error occurred while fetching more images. Please try again later.'
+      );
     });
 });
 function scrollToLastAddedCard() {
@@ -78,12 +87,12 @@ function scrollToLastAddedCard() {
 }
 
 function checkValueCounts(values, totalValues) {
-  if (values >= per_page && totalValues > gallery.childElementCount) {
+  if (values >= per_page && totalValues > per_page) {
     page += 1;
     showFetchMorePostsBtn();
   } else {
-    iziToastInfo("We're sorry, but you've reached the end of search results.");
     hideFetchMorePostsBtn();
+    iziToastInfo("We're sorry, but you've reached the end of search results.");
   }
 }
 
